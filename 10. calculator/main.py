@@ -92,6 +92,5 @@ def looping_calculate(function):
             is_continue = True
 
 # RUN 
-M = 0 # memory of calculator
 looping_calculate(calculate())
 
