@@ -2,6 +2,7 @@ import accounts_data
 import random
 import os
 
+
 def random_accounts():
     """ Randomly choose one of the account from data
 
@@ -13,7 +14,7 @@ def random_accounts():
 
 
 def which_bigger(account_1, account_2):
-    """Funtion checking which account is bigger basing on the followe_count value. 
+    """Function checking which account is bigger basing on the follower_count value.
 
     Returns:
         Dict: bigger account
@@ -24,7 +25,7 @@ def which_bigger(account_1, account_2):
         return 2
 
 
-def print_accounts(account_1 = {}, account_2 = {}):
+def print_accounts(account_1, account_2):
     print("Which account has more followers on Instagram?\n")
     print(f"{account_1['name']}, {account_1['description']}, from {account_1['country']} ")
     print("\tvs\t")
@@ -48,7 +49,8 @@ def program():
                     account_2 = random_accounts()   
                 print_accounts(account_1, account_2)
                 # check_choice(account_1, account_2)
-                choice = int(input(f"\nType '1' if you choose {account_1['name']}, or '2' if you choose {account_2['name']}: "))
+                choice = int(input(f"\nType '1' if you choose {account_1['name']},"
+                                   f" or '2' if you choose {account_2['name']}: "))
                 os.system('cls')
                 if choice == which_bigger(account_1, account_2):
                     # score up
@@ -57,7 +59,7 @@ def program():
                     is_right = True
                 else:
                     print(f"Wrong choice :(\nYour score: {score}")
-                    is_right =  False
+                    is_right = False
         elif play == 'n':
             again = False
             print("Goodbye!")
