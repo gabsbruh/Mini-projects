@@ -24,5 +24,12 @@ MENU = {
     }
 }
 
+capacity_of_resources = {"water": 5000.0, "milk": 2000.0, "coffee": 1000.0}
 
+coins = {
+    'QUARTERS' : 0.25,
+    'DIMES' : 0.10,
+    'NICKLES' : 0.05,
+    'PENNIES' : 0.01
+}
 
