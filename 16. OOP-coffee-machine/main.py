@@ -16,7 +16,6 @@ if not maker.is_resource_sufficient(item):
 print( f'Put ${item.cost} to the machine:')
 money.report()
 if money.make_payment(item.cost):
-    money.report()
     maker.make_coffee(item)
 else:
     print("Insufficent funds!")
