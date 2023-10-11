@@ -2,7 +2,8 @@ from turtle import Screen
 from snake import Snake
 import time
 
-
+# constants
+REFRESH_SPEED = 0.2
 
 def main():
     # set up the screen
@@ -15,11 +16,18 @@ def main():
     # creating initial snake
     snake = Snake()
     
+    # snake movement
+    screen.listen()
+    screen.onkey(snake.up, "Up")
+    screen.onkey(snake.down, "Down")
+    screen.onkey(snake.left, "Left")
+    screen.onkey(snake.right, "Right")
+    
     # proper game
     game_on = True
     while game_on:
         screen.update()
-        time.sleep(0.1)
+        time.sleep(REFRESH_SPEED)
         snake.move()
     screen.exitonclick()
 
