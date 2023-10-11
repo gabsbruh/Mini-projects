@@ -2,10 +2,10 @@ import turtle as t
 import random
 
 # global variables
-meta = 960
-start = -980
+meta = 460
+start = -480
 screen = t.Screen()
-screen.setup(2000, 400)
+screen.setup(1000, 400)
 
 def check_pos(turtle):
     if turtle.xcor() >= meta:
@@ -100,8 +100,6 @@ def create_a_meta():
         
 
 def main():
-    
-
     create_a_meta()
         # assigning turtle objects to the list
     turtle_list = [None for i in range(6)]
