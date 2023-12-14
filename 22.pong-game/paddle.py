@@ -33,3 +33,5 @@ class Paddle(Turtle):
     def down(self):
         self.curr_cords = {'x': self.xcor(), 'y': self.ycor()}       
         self.sety(self.curr_cords['y'] - 20)
+        
+        
