@@ -12,3 +12,5 @@ class Ball(Turtle):
         
     def move(self):
         self.setpos(self.xcor() + c.BALL_SPEED, self.ycor() + c.BALL_SPEED)
+        
+        
