@@ -23,10 +23,11 @@ def main():
     # TODO zmien tak aby po jednym kliknieciu caly czas szlo w dol,
     # nie trzeba wtedy bedzie robic przyciskow jednoczesnych 
     # GENIALNY POMYSL 
-    vs_cpu = False
+
+    
     screen.listen()
-    if vs_cpu:
-        screen.onkeypress(left_paddle.up, "Up")
+    if c.VS_CPU:
+        x = screen.onkeypress(left_paddle.up, "Up")
         screen.onkeypress(left_paddle.down, "Down")
         screen.onkeypress(left_paddle.up, "w")
         screen.onkeypress(left_paddle.down, "s")   
@@ -34,8 +35,10 @@ def main():
         screen.onkeypress(left_paddle.up, "w")
         screen.onkeypress(left_paddle.down, "s")            
         screen.onkeypress(right_paddle.up, "Up")
-        screen.onkeypress(right_paddle.down, "Down") 
+        screen.onkeypress(right_paddle.down, "Down")     
     
+    # detect collision with paddle
+
     
     # proper game
     game_on = True
@@ -43,7 +46,13 @@ def main():
         screen.update()
         ball.move()
         time.sleep(c.REFRESH_SPEED)
-        
+
+        if ball.ycor() >= 430 or ball.ycor() <= -430:
+            ball.bounce_wall()
+        if ((ball.xcor() > 340 and ball.distance(right_paddle) < 50) or
+           (ball.xcor() > 340 and ball.distance(left_paddle) < 50)):
+            ball.bounce_paddle()
+            
     screen.exitonclick()
     
     
