@@ -1,6 +1,10 @@
+VS_CPU = False # control of the right paddle - by a second player or automatically
 PADDLE_HEIGHT = 150 # how long paddle is
 SCREEN_WIDTH = 1200 # width of the game screen
 SCREEN_HEIGHT = 900 # height of the game screen
 REFRESH_SPEED = 0.01 # tick rate
 BALL_SPEED = 3 # turtle.forward on each tick
-VS_CPU = False # control of the right paddle - by a second player or automatically
+BALL_LIMIT = (SCREEN_WIDTH/2)-5 # ball furthest xcor position
+PADDLE_COLLISION_LIMIT = (SCREEN_WIDTH/2)-65 # position of collisio
+WALL_COLLISION_LIMIT = (SCREEN_HEIGHT/2)-20
+PADDLE_RANGE = PADDLE_HEIGHT/2 - 5
