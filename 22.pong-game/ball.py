@@ -11,6 +11,7 @@ class Ball(Turtle):
         self.x_move = c.BALL_SPEED
         self.y_move = 0
         self.reset()
+        self.move_speed = 0.025
         
     def move(self):
         self.setpos(x=self.xcor() + self.x_move, y=self.ycor() + self.y_move)
@@ -22,12 +23,19 @@ class Ball(Turtle):
         self.y_move *= -1
         
     def bounce_paddle(self):
-        self.x_move *= -1
+        self.x_move *= -1 
+        self.x_move += self.__randomize()*random()
+        self.y_move += self.__randomize()*random()
+        self.move_speed *= 0.85
     
     def reset(self):
         self.setpos(x=0, y=0)
-        direction = -1 if randint(1,2) == 1 else 1
-        self.y_move = random() * c.BALL_SPEED * direction
+        self.y_move = random() * c.BALL_SPEED * self.__randomize() + 0.5
+        self
+        self.move_speed = 0.025
+    
+    def __randomize(self):
+        return -1 if randint(1,2) == 1 else 1
     
     @property
     def coordinates(self):

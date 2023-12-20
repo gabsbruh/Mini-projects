@@ -46,8 +46,11 @@ def main():
     while game_on:
         screen.update()
         ball.move()
-        time.sleep(c.REFRESH_SPEED)
-
+        time.sleep(ball.move_speed)
+        if (score.score['left'] == c.FINAL_SCORE) or (score.score['right'] == c.FINAL_SCORE):
+            ball.ht()
+            score.endgame_statement()
+            game_on = False
         # detect collision with wall
         if ball.ycor() >= c.WALL_COLLISION_LIMIT or ball.ycor() <= -c.WALL_COLLISION_LIMIT:
             ball.bounce_wall()
@@ -62,12 +65,13 @@ def main():
             score.left_score_up()
             time.sleep(1)
             ball.reset()
-            
+            score.update()
             
         elif ball.xcor() <= -c.BALL_LIMIT:
             score.right_score_up()
             time.sleep(1)
             ball.reset()
+            score.update()
             
 
         
