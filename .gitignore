@@ -1,2 +1,11 @@
+# my exercises
 exercise[0-9].py
+
+# cache
 __pycache__
+
+# intellij project configurations
+.idea
+
+# scratch files
+file[0-9]*
