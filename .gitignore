@@ -9,3 +9,6 @@ __pycache__
 
 # scratch files
 file[0-9]*
+
+# testing files
+test[0-9]*
