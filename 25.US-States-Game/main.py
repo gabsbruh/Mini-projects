@@ -20,17 +20,13 @@ def main():
     answers_df = pd.read_csv("50_states.csv")
 
     # lower case of state to validate with answer later
-    for i in range(len(answers_df.state)):
-        answers_df.iloc[i, 0] = answers_df.iloc[i, 0].lower()
+    answers_df.state = [answers_df.iloc[i, 0].lower() for i in range(len(answers_df.state))]
 
     # creating writing turtle
     writer = Writer()
     
     # store states which wasn't written
-    written_states = []
-    for state in answers_df.state:
-        written_states.append(state)
-    print(written_states)
+    written_states = [state for state in answers_df.state]
 
     while 50-len(written_states) < 50:
         # input the state
