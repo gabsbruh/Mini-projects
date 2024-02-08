@@ -2,7 +2,8 @@ from turtle import Turtle
 import turtle
 
 FONT = ("Arial", 8, "bold")
-ALIGNMENT = "left"
+WIN_FONT = ("Arial", 40, "bold")
+ALIGNMENT = "center"
 
 class Writer(Turtle):
     def __init__(self):
@@ -10,6 +11,7 @@ class Writer(Turtle):
         self.ht()
         self.color("black")
         self.shape('circle')
+        self.speed(0)
     
     def write_state(self, state_name: str, x: float, y: float):
         """Points state and sign it
@@ -21,3 +23,7 @@ class Writer(Turtle):
         self.pu()
         self.goto(x, y)
         self.write(state_name, align=ALIGNMENT, font=FONT)
+
+    def win(self):
+        self.goto(0,0)
+        self.write("YOU WIN!", align=ALIGNMENT, font=WIN_FONT)
