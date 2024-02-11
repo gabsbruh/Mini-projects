@@ -1,6 +1,15 @@
 from tkinter import *
 
 def calculate(var, mode):
+    """main conversion function
+
+    Args:
+        var (float): variable to be converted
+        mode (boolean): type of conversion(miles to km is True, inverted False)
+
+    Returns:
+        float: converted variable to another unit
+    """
     if mode == True:
         return round(1.60934*var, 3)
     elif mode == False:
@@ -43,8 +52,11 @@ def main():
     output_.focus() # can click on text and toggle between string
     output_["state"] = 'disabled' # unable writing to the output
     
-    # calculate button
     def calculate_wrap():
+        """Wrapper to the calculate() function which initializes it, gather arguments
+        for it. Additionally it configurates the output to display the output. This wrapper
+        can be passed to the Button init so existence of this fun is significant.
+        """
         var = float(input_.get())
         mode = True if switch.config('text')[-1] == 'km to miles' else False
         output = calculate(var, mode)
