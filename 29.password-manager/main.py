@@ -1,7 +1,8 @@
 import tkinter as tk
+from tkinter import messagebox
+import random
 
 # ---------------------------- CONSTANTS ------------------------------- #
-
 FONT = ("Courier", 10, "normal")
 DEFAULT_EMAIL = 'mostcommon@email.com'
 
@@ -20,11 +21,21 @@ def add_pwd():
     email_getter = email_entry.get()
     password_getter = password_entry.get()
     
-    # concatenate data got to one row
-    output = "  |  ".join([web_getter, email_getter, password_getter])
-    # save data to file
-    with open('data.txt', 'a') as data:
-        data.write(output + '\n')
+    # validate if textboxes are not empty
+    if len(web_getter) == 0 or len(email_getter) == 0 or len(password_getter) == 0:
+        messagebox.showinfo(title="Blank rows", message="Don't leave textboxes empty!")
+    
+    else:  
+        # concatenate data got to one row and make sure is it ok
+        output = "  |  ".join([web_getter, email_getter, password_getter])
+        
+        # let the user validate entry in the pop-up
+        is_ok = messagebox.askokcancel(title='data file', 
+                            message=f'Text below:\n{output}\nwill be saved to a data file. Proceed?')
+        if is_ok:    
+            # save data to file
+            with open('data.txt', 'a') as data:
+                data.write(output + '\n')
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -36,7 +47,7 @@ window.title("Password Manager")
 # canvas widget to hold the logo
 canvas = tk.Canvas(width=200, height=200)
 logo = tk.PhotoImage(file='logo.png')
-canvas.create_image(100, 100, image=logo) # first two vairables stnads for place for the image
+canvas.create_image(100, 100, image=logo) # first two vairables stands for place for the image
 canvas.grid(column=1, row=0)
 
 ######### LABELS #########
@@ -67,11 +78,6 @@ generate.grid(column=2, row=3)
 
 add = tk.Button(text='Add', command=add_pwd, width=36)
 add.grid(column=1, row=4, columnspan=2)
-
-######### MESSAGE BOXES #########
-
-
-
 
 # main loop of program
 window.mainloop()
