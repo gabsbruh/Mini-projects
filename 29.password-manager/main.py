@@ -3,6 +3,7 @@ import tkinter as tk
 # ---------------------------- CONSTANTS ------------------------------- #
 
 FONT = ("Courier", 10, "normal")
+DEFAULT_EMAIL = 'mostcommon@email.com'
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_pwd():
@@ -15,7 +16,16 @@ def generate_pwd():
 def add_pwd():
     """Function attachable to the button. Designed for saving password to a file with all pasword which program is holding
     """
-    pass
+    web_getter = website_entry.get()
+    email_getter = email_entry.get()
+    password_getter = password_entry.get()
+    
+    # concatenate data got to one row
+    output = "  |  ".join([web_getter, email_getter, password_getter])
+    # save data to file
+    with open('data.txt', 'a') as data:
+        data.write(output + '\n')
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 # main window
@@ -40,23 +50,28 @@ password = tk.Label(text='Password: ', font=FONT)
 password.grid(column=0, row=3)
 
 ######### INPUTS #########
-
 website_entry = tk.Entry(width=35)
 website_entry.grid(column=1, row=1, columnspan=2)
+website.focus()
 
-column_entry = tk.Entry(width=35)
-column_entry.grid(column=1, row=2, columnspan=2)
+email_entry = tk.Entry(width=35)
+email_entry.grid(column=1, row=2, columnspan=2)
+email_entry.insert('0', DEFAULT_EMAIL) # default email to write
 
 password_entry = tk.Entry(width=21)
 password_entry.grid(column=1, row=3)
 
 ######### BUTTONS #########
-
 generate = tk.Button(text="Generate Password", command=generate_pwd)
 generate.grid(column=2, row=3)
 
 add = tk.Button(text='Add', command=add_pwd, width=36)
 add.grid(column=1, row=4, columnspan=2)
+
+######### MESSAGE BOXES #########
+
+
+
 
 # main loop of program
 window.mainloop()
