@@ -61,9 +61,6 @@ def add_pwd():
         messagebox.showinfo(title="Blank rows", message="Don't leave textboxes empty!")
     
     else:  
-        # concatenate data got to one row and make sure is it ok
-        output = "  |  ".join([web_getter, email_getter, password_getter])
-        
         # let the user validate entry in the pop-up
         is_ok = messagebox.askokcancel(title='Data validation', 
                                        message=f"""
@@ -75,25 +72,45 @@ Password:  {password_getter}\n
 """)
         
         if is_ok:  
-            current_data = '' # container to store the old data (if exists)
             try:
                 with open('data.json', 'r') as data: # method 'read' to get old version on data holder
                     current_data = json.load(data)
                     current_data.update(new_data)
             except FileNotFoundError:
-                with open('data.json', 'w') as data: # method 'write' to create new file
+                with open('data.json', 'w') as data: # case when file doesn't exist
                     current_data = new_data
+            except json.decoder.JSONDecodeError: # case when file is empty
+                current_data = new_data
             finally:
-                with open('data.json', 'w') as data: # method 'write' to update
+                with open('data.json', 'w') as data: # method 'write' to update by json.dump
                     json.dump(current_data, data, indent=4)
                     password_entry.delete('0', tk.END)
-                    website_entry.delete('0', tk.END)                
+                    website_entry.delete('0', tk.END)  
+                  
+# ---------------------------- SEARCH FOR WEBSITE ------------------------------- #
+def on_search():
+    try:
+        web_getter = website_entry.get()
+        with open('data.json', 'r') as data:
+            data_dict = json.load(data)
+            found_example = data_dict[web_getter]
+            email_getter = found_example["email"]
+            password_getter = found_example["password"]
+            messagebox.askokcancel(title='Info', message=f"""
+Passes for {web_getter} website:\n
+    Username:    {email_getter}\n
+    Password:     {password_getter}\n
+""")
+    except (FileNotFoundError, json.decoder.JSONDecodeError): 
+        messagebox.showinfo(title='Warning!', message="You don't have any saves yet.")
+    except KeyError:
+        messagebox.showinfo(title='No pass!', message="Pass to that website doesn't exist.")    
 
 # ---------------------------- UI SETUP ------------------------------- #
 
 # main window
 window = tk.Tk()
-window.config(padx=20, pady=20)
+window.config(padx=50, pady=50)
 window.title("Password Manager")
 
 # canvas widget to hold the logo
@@ -125,11 +142,14 @@ password_entry = tk.Entry(width=35)
 password_entry.grid(column=1, row=3, columnspan=2)
 
 ######### BUTTONS #########
-generate = tk.Button(text="Generate", command=generate_pwd)
+generate = tk.Button(text="Generate", command=generate_pwd, width=15)
 generate.grid(column=3, row=3)
 
 add = tk.Button(text='Add', command=add_pwd, width=33, border=3)
 add.grid(column=1, row=5, columnspan=2, pady=20)
+
+search = tk.Button(text="Search", command=on_search, width=15)
+search.grid(column=3, row=1)
 
 # main loop of program
 window.mainloop()
