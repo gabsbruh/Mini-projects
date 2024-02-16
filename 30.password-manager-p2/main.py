@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import random
+import json
 
 # ---------------------------- CONSTANTS ------------------------------- #
 FONT = ("Courier", 10, "normal")
@@ -47,6 +48,13 @@ def add_pwd():
     web_getter = website_entry.get()
     email_getter = email_entry.get()
     password_getter = password_entry.get()
+    # input to json data file
+    new_data = {
+        web_getter: {
+            'email': email_getter,
+            'password': password_getter,
+        }
+    }
     
     # validate if textboxes are not empty
     if len(web_getter) == 0 or len(email_getter) == 0 or len(password_getter) == 0:
@@ -66,10 +74,20 @@ Password:  {password_getter}\n
     Will be saved to a data file. Proceed?
 """)
         
-        if is_ok:    
-            # save data to file
-            with open('data.txt', 'a') as data:
-                data.write(output + '\n')
+        if is_ok:  
+            current_data = '' # container to store the old data (if exists)
+            try:
+                with open('data.json', 'r') as data: # method 'read' to get old version on data holder
+                    current_data = json.load(data)
+                    current_data.update(new_data)
+            except FileNotFoundError:
+                with open('data.json', 'w') as data: # method 'write' to create new file
+                    current_data = new_data
+            finally:
+                with open('data.json', 'w') as data: # method 'write' to update
+                    json.dump(current_data, data, indent=4)
+                    password_entry.delete('0', tk.END)
+                    website_entry.delete('0', tk.END)                
 
 # ---------------------------- UI SETUP ------------------------------- #
 
