@@ -2,9 +2,7 @@ import pandas as pd
 import datetime as dt
 import random
 import smtplib
-from typing import NamedTuple
 
-# 2. Check if today matches a birthday in the birthdays.csv
 now = dt.datetime.now()
 date = (now.day, now.month) # sign today's date into a tuple
 
@@ -14,9 +12,6 @@ today_birthdays = {}# store today's birthdays in namedtuple (let's try this type
 for _,row in birthdays.iterrows():
     if row['day'] == date[0] and row['month'] == date[1]:
         today_birthdays[row['name']] = row['email']
-
-
-# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
 
 # replace name in the letter for each user
 letter_lists = {} # {email:letter}
@@ -28,7 +23,6 @@ for (name, email) in today_birthdays.items():
     # changing [NAME] to a specific name from today_birthdays list
     letter_lists[email] = personalized
 
-# 4. Send the letter generated in step 3 to that person's email address.
 # create connection
 with smtplib.SMTP(host="smtp.gmail.com", port=587) as connect:
     connect.starttls() # secure the connection
