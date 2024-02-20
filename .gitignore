@@ -15,3 +15,6 @@ test[0-9]*
 
 # explanatory files
 learn*
+
+# vscode jsons, etc.
+.vscode
