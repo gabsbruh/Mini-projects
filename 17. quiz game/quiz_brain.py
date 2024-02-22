@@ -1,3 +1,5 @@
+import html
+
 class QuizzBrain:
     def __init__(self, question_input, question_number=0, score=0):
         self.question_input = question_input
@@ -7,7 +9,7 @@ class QuizzBrain:
     def next_question(self):
         current_q = self.question_input[self.question_number]
         self.question_number += 1
-        user_answer = input(f"Question {self.question_number}. {current_q.text} write true/false: \t\t")
+        user_answer = input(f"Question {self.question_number}. {html.unescape(current_q.text)} write true/false: \t\t")
         return user_answer.capitalize()
         
     def still_questions(self):
