@@ -1,39 +1,85 @@
-import requests
+import datetime as dt
+import json
+from twilio.rest import Client
 
-## TODO 1: Use https://www.alphavantage.co
+
+today = dt.datetime.today().date()
+delta = dt.timedelta(days=1) # equals to 1 day, subtractable from today's date
+# CONSTANTS
+DAYS_BACK = 5
+RANGE_OF_DAYS = (today-delta, today-DAYS_BACK*delta) # parameter for news api to which days to look for the news
+DEGREE_OF_SENSIVITY = 0.01+5 # how much reative change should be in stock price to be notified with infos?
+STOCK_COMPANY_NAME = "TSLA" # for data extraction from api
+NUMBER_OF_NEWS = 3 # how much news user will get in SMS
+
+
+## TODO 1:
 # When stock price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
-api_key = "SHPBSG8PA78PHTXO"
-stock = "TSLA"
-company_name = "Tesla Inc"
+# import data
+with open('data.json', 'r') as datafile:
+    json_data = datafile.read()
+data = json.loads(json_data) # convert json data to dict
 
-url = 'https://www.alphavantage.co/query'
-params = {
-    "function": "TIME_SERIES_INTRADAY",
-    "symbol": stock,
-    "interval": "5min",
-    "apikey": api_key,
-}
+try:
+    def max_stock_price(data: dict, date: dt.datetime, days_back_min: int=0, days_back_max: int=0) -> float:
+        """return max value of 'close' variable from data on specified day
 
-r = requests.get(url=url, params=params)
-data = r.json()
+        Args:
+            data (dict): data with registered stock prices
+            date (dt.datetime): date to look for in the data
+            days_back_min (int): minimum difference of time to look for data
+            days_back_max (int): maximum difference of time to look for data. 
+            default variables is set to look for only today.
 
-print(data)
+        Returns:
+            (float): max value in specified data
+        """
+        stock_prices = []
+        for day in range(days_back_min, days_back_max+1):
+            for (key, value) in data["Time Series (30min)"].items():
+                if (str(date - delta*day)) in key:
+                    stock_prices.append(value["4. close"]) 
+            if len(stock_prices) > 0:
+                return max(stock_prices)
+    yesterday_max_stock_price = float(max_stock_price(data, today, days_back_min=1, days_back_max=1))
+    two_day_ago_max_stock_price = float(max_stock_price(data, today, days_back_min=2, days_back_max=DAYS_BACK)) #2-days back
+    
+except (KeyError):
+    raise Exception("RateLimitExceededError:\tAPI rate limit is 25 requests per day")
 
-## TODO 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+except (TypeError):
+    raise Exception(f"The data is outdated ({today}). Run the data file to fetch the latest data.")
 
-## TODO 3: Use https://www.twilio.com
+
+## TODO 2:
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+# when stock price changed more than 5% recently, get news 
+
+relative_change = (yesterday_max_stock_price - two_day_ago_max_stock_price)/max([yesterday_max_stock_price, two_day_ago_max_stock_price])
+if relative_change >= DEGREE_OF_SENSIVITY or relative_change <= -DEGREE_OF_SENSIVITY:
+    # import news data
+    with open('news.json', 'r') as datafile:
+        json_data = datafile.read()
+    news = json.loads(json_data) # convert json data to dict
+    is_stock_price_up = "🔺" if relative_change > 0 else "🔻"
+    #form message to SMS
+    message = [f"{STOCK_COMPANY_NAME}: {is_stock_price_up} {round(abs(relative_change)*100, 2)}%"]
+    for number in range(NUMBER_OF_NEWS):
+        url = news["articles"][number]["url"]
+        title = news["articles"][number]["title"]
+        content = news["articles"][number]["description"]
+        message.append(f"Headline: {title}\nBrief: {content}\nURL:{url}")
+    message = "\n\n".join(message)
+
+
+## TODO 3:
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
-
-
-#Optional: Format the SMS message like this: 
-"""
-TSLA: 🔺2%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-or
-"TSLA: 🔻5%
-Headline: Were Hedge Funds Right About Piling Into Tesla Inc. (TSLA)?. 
-Brief: We at Insider Monkey have gone over 821 13F filings that hedge funds and prominent investors are required to file by the SEC The 13F filings show the funds' and investors' portfolio positions as of March 31st, near the height of the coronavirus market crash.
-"""
-
+if relative_change >= DEGREE_OF_SENSIVITY or relative_change <= -DEGREE_OF_SENSIVITY:
+    account_sid = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    auth_token = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    client = Client(account_sid, auth_token)
+    message = client.messages.create(
+    from_='+12XXXXXXXXX',
+    body=message,
+    to='+48XXXXXXXXX'
+    )
