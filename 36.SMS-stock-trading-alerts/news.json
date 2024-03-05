@@ -1,0 +1,71 @@
+{
+    "status": "ok",
+    "totalResults": 139,
+    "articles": [
+        {
+            "source": {
+                "id": null,
+                "name": "MacRumors"
+            },
+            "author": "Hartley Charlton",
+            "title": "The MacRumors Show: RIP Apple Car",
+            "description": "On this week's episode of The MacRumors Show, we discuss Apple's decision to cancel its long-rumored electric vehicle project. \n\n\n\n\r\nSubscribe to The MacRumors Show YouTube channel for more videos\n\nDespite Apple's reputation for innovation, the company strugg\u2026",
+            "url": "https://www.macrumors.com/2024/03/01/the-macrumors-show-rip-apple-car/",
+            "urlToImage": "https://images.macrumors.com/t/G-OY1qrPEIrw7Q1crY2xOKtrdHw=/1600x/https://img.youtube.com/vi/Sjq0sTUSQb0/maxresdefault.jpg",
+            "publishedAt": "2024-03-01T16:58:02Z",
+            "content": "On this week's episode of The MacRumors Show, we discuss Apple's decision to cancel its long-rumored electric vehicle project. \r\nDespite Apple's reputation for innovation, the company struggled to ac\u2026 [+2674 chars]"
+        },
+        {
+            "source": {
+                "id": "business-insider",
+                "name": "Business Insider"
+            },
+            "author": "Jyoti Mann",
+            "title": "Elon Musk sues Sam Altman, accusing him of betraying OpenAI's mission of benefiting humanity",
+            "description": "Elon Musk filed a lawsuit against OpenAI and CEO Sam Altman, claiming the company's partnership with Microsoft threatens its original non-profit mission.",
+            "url": "https://www.businessinsider.com/elon-musk-sues-sam-altman-betrays-openai-mission-chatgpt-2024-3",
+            "urlToImage": "https://i.insider.com/65e1b4c56080194819fb7e32?width=1200&format=jpeg",
+            "publishedAt": "2024-03-01T11:26:52Z",
+            "content": "Elon Musk and Sam Altman.Slaven Vlasic, Andrew Caballero-Reynolds/Getty Images\r\n<ul><li>Elon Musk is suing OpenAI and its CEO Sam Altman.</li><li>Musk accused the company's partnership with Microsoft\u2026 [+1499 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "ReadWrite"
+            },
+            "author": "Sophie Atkinson",
+            "title": "Alef Aeronautics: SpaceX backed firm has nearly 3,000 pre-orders for flying car",
+            "description": "Back To The Future\u2019s vision of flying cars whizzing through our skies is set to be made into reality as [\u2026]\nThe post Alef Aeronautics: SpaceX backed firm has nearly 3,000 pre-orders for flying car appeared first on ReadWrite.",
+            "url": "https://readwrite.com/alef-aeronautics-spacex-backed-firm-has-nearly-3000-pre-orders-for-flying-car/",
+            "urlToImage": "https://readwrite.com/wp-content/uploads/2024/03/alef-real-car.jpg",
+            "publishedAt": "2024-03-04T10:56:54Z",
+            "content": "Back To The Futures vision of flying cars whizzing through our skies is set to be made into reality as a two-seater car has been pre-ordered by 2,850 people.\r\nAlef Aeronautics, based out of San Mateo\u2026 [+2096 chars]"
+        },
+        {
+            "source": {
+                "id": "abc-news",
+                "name": "ABC News"
+            },
+            "author": "Max Zahn",
+            "title": "Elon Musk sues OpenAI. Some legal experts cast doubt on the case.",
+            "description": "Elon Musk sued OpenAI and its CEO Sam Altman on Friday alleging the ChatGPT maker abandoned its mission of benefiting humanity in a sprint toward profits.",
+            "url": "https://abcnews.go.com/Technology/elon-musk-sues-openai-legal-experts-cast-doubt/story?id=107713674",
+            "urlToImage": "https://i.abcnewsfe.com/a/ba5e8ced-4f05-4bce-b1f4-68cd82c68ab5/elon-musk-file-rt-ml-240301_1709312267232_hpMain_16x9.jpg?w=1600",
+            "publishedAt": "2024-03-01T20:27:15Z",
+            "content": "Elon Musk sued OpenAI and its CEO Sam Altman on Friday alleging the ChatGPT maker abandoned its mission of benefiting humanity in a sprint toward profits.\r\nSome legal experts who spoke to ABC News, h\u2026 [+4625 chars]"
+        },
+        {
+            "source": {
+                "id": null,
+                "name": "MarketWatch"
+            },
+            "author": "Claudia Assis",
+            "title": "Tesla\u2019s stock slides 5% after fresh volley of price cuts and discounts from EV maker",
+            "description": "Shares of Tesla Inc. fell more than 5% Monday amid a fresh round of discounts and price cuts for the electric-vehicle maker.",
+            "url": "https://www.marketwatch.com/story/teslas-stock-slides-5-after-fresh-volley-of-price-cuts-and-discounts-from-ev-maker-dc1655f2",
+            "urlToImage": "https://images.mktw.net/im-25944526/social",
+            "publishedAt": "2024-03-04T16:53:00Z",
+            "content": "Shares of Tesla Inc. fell more than 5% Monday amid a fresh round of discounts and price cuts by the electric-vehicle maker in China and in the U.S.\r\nIn China, Tesla TSLA is offering incentives of up \u2026 [+165 chars]"
+        }
+    ]
+}
