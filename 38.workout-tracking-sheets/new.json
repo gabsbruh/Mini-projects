@@ -1,0 +1,7 @@
+{'exercises': [
+        {'tag_id': 100, 
+        'user_input': 'walking', 
+        'duration_min': 62.14, 
+        'met': 3.5, 
+        'nf_calories': 253.74, 
+]}
