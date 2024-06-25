@@ -1,6 +1,7 @@
 import constants as c
 import requests
 
+
 class FlightSearch:
     """This class is responsible for talking to the Flight Search API.
     """
@@ -9,6 +10,7 @@ class FlightSearch:
         self.api_secret = c.AMADEUS_API_SECRET
         self.url_iata = c.AMADEUS_URL_IATA_CODE
         self.url_token = c.AMADEUS_URL_NEW_TOKEN
+        self.url_flights = c.AMADEUS_URL_FLIGHTS
         self.api_header = self._get_new_token()
     
     def _get_new_token(self):
@@ -44,3 +46,43 @@ class FlightSearch:
         
         return code
     
+    def check_flight(self, olc: str, dlc: str, dep_date: str, 
+                     ret_date: str, adults: int, max_price: float, 
+                     nonStop: bool=True, currency: str='PLN') -> dict:
+        """Function send api call to the amadeus api in order to look for flights in specified data.
+
+        Args:
+            olc (str): city/airport IATA code from which the traveler will depart 
+            dlc (str): city/airport IATA code to which the traveler is going
+            dep_date (str): the date YYYY-MM-DD on which the traveler will depart from the origin to go to the destination.  
+            ret_date (str): the date YYYY-MM-DD on which the traveler will depart from the destination to return to the origin. 
+            adults (int): the number of adult travelers 
+            max_price (float): maximum price per traveler.
+            nonStop (bool, optional): The search will find only flights going from the origin to the destination with no stop in between. Defaults to True.
+            currency (str, optional): The preferred currency for the flight offers. Default to 'PLN'.
+        Returns:
+            dict: json with data about flights
+        """
+        call_params = {
+            'originLocationCode': olc,
+            'destinationLocationCode': dlc,
+            'departureDate': dep_date,
+            'returnDate': ret_date,
+            'adults': adults,
+            'nonStop': str(nonStop).lower(), # there was problems with bool titlecase
+            'currencyCode': currency,
+            'maxPrice': max_price,
+            'max': 5
+        }
+        json_ = requests.get(url=self.url_flights, params=call_params, headers=self.api_header)
+        if json_.status_code == 200:
+            return json_.json()
+        else:
+            print('Fligths response code: ', json_.status_code)
+            
+            print(json_.text)
+            
+            print("""\nThere was a problem with search. 
+                  For further information, please visit: 
+                  https://developers.amadeus.com/self-service/apis-docs/guides/developer-guides/common-errors/""")
+            return None
