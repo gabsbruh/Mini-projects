@@ -24,9 +24,9 @@ class FlightSearch:
         }
         try:
             response = requests.post(url=self.url_token, data=params, headers=head)
-        except:
-            raise Exception("You have reached the allowed number of API calls for today.")
-        print(response.text)
+        except response.status_code != 200:
+            print(response.status_code)
+            print(response.text)
         response = response.json()
         token = "Bearer " + response["access_token"]
         updated_header = {"Authorization": token}
