@@ -46,9 +46,11 @@ class FlightSearch:
         
         return code
     
+
     def check_flight(self, olc: str, dlc: str, dep_date: str, 
                      ret_date: str, adults: int, max_price: float, 
-                     nonStop: bool=True, currency: str='PLN') -> dict:
+                     nonStop: bool=True, currency: str='PLN', 
+                     travel_class: str = 'ECONOMY') -> dict:
         """Function send api call to the amadeus api in order to look for flights in specified data.
 
         Args:
@@ -69,6 +71,7 @@ class FlightSearch:
             'departureDate': dep_date,
             'returnDate': ret_date,
             'adults': adults,
+            'travelClass': travel_class,
             'nonStop': str(nonStop).lower(), # there was problems with bool titlecase
             'currencyCode': currency,
             'maxPrice': max_price,
@@ -86,3 +89,4 @@ class FlightSearch:
                   For further information, please visit: 
                   https://developers.amadeus.com/self-service/apis-docs/guides/developer-guides/common-errors/""")
             return None
+
