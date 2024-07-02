@@ -19,6 +19,18 @@ class DataManager:
                 "iataCode": iata_code,
             }         
         }
-        response = requests.put(url=f"{self.url}/{city_id}", json=put_params, headers=self.auth)
-        print(response.text)
+        try:
+            response = requests.put(url=f"{self.url}/{city_id}", json=put_params, headers=self.auth)
+        except response.status_code != 200:
+            print('There was a problem with retrieving data.')
+            print(response.text)
     
+    def get_data(self) -> dict:
+        """Get data from sheet.
+        
+        Returns:
+            dict: json with all data.
+        """
+        sheet_data = requests.get(url=self.url, headers=self.auth)
+        return sheet_data.json()
+        
