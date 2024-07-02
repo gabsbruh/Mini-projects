@@ -9,12 +9,11 @@ from notification_manager import NotificationManager
 
 def main():
     # get data from sheet
-    sheet_data = requests.get(url=c.SHEETY_URL, headers=c.AUTH_HEADER)
-    sheet_data = sheet_data.json()
+    data_manager = DataManager()
+    sheet_data = data_manager.get_data()
 
     # look for empty iatacode and send them to FlightSearch class in order to fill it
     flight_search = FlightSearch()
-    data_manager = DataManager()
     for elem in sheet_data["prices"]:
         if (len(elem["iataCode"]) == 0) or (elem["iataCode"] == "Not Found."):
             city = elem["city"]
@@ -25,3 +24,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+### XXX:
+""" Aktualnie apka znajduje najtanszy lot w podanym przedziale dat, na podstawie wyszukiwania
+dla jednego destination (flight_data i tam jest instancja dla PAR i   price 2000)
+
+Rate limit wciaz nie jest dobrany, srednio raz na 10 calli wyskakuje proglem (mimo ze jest ustawiony ponizej
+wymaganego na amadeus api, moze trzeba zmniejszyc period do 100ms i 1 call)
+
+kolejny krok to zautomatyzowanie wyszukiwania najtanszych lotow
+"""
