@@ -13,7 +13,11 @@ AMADEUS_URL_NEW_TOKEN = "https://test.api.amadeus.com/v1/security/oauth2/token"
 AMADEUS_URL_FLIGHTS = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
 # specifications for flights
-ADULTS = 2
+ADULTS = 1
 MAX_PERIOD_MONTHS = 6
 CURRENCY = 'PLN'
 DEFAULT_ORIGIN_CODE = 'KRK'
+
+# API LIMITS
+PERIOD = 1 # time in seconds
+RATE = 9 # rate per period
