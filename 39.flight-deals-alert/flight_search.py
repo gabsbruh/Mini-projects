@@ -1,6 +1,6 @@
 import constants as c
 import requests
-
+from ratelimit import limits, sleep_and_retry
 
 class FlightSearch:
     """This class is responsible for talking to the Flight Search API.
@@ -13,6 +13,8 @@ class FlightSearch:
         self.url_flights = c.AMADEUS_URL_FLIGHTS
         self.api_header = self._get_new_token()
     
+    @sleep_and_retry
+    @limits(calls=c.RATE, period=c.PERIOD)
     def _get_new_token(self):
         head ={
             "content-type": 'application/x-www-form-urlencoded',
@@ -32,6 +34,8 @@ class FlightSearch:
         updated_header = {"Authorization": token}
         return updated_header
     
+    @sleep_and_retry
+    @limits(calls=c.RATE, period=c.PERIOD)
     def get_iata_code(self, city_name):
         params ={
             "keyword": city_name,
@@ -46,7 +50,8 @@ class FlightSearch:
         
         return code
     
-
+    @sleep_and_retry
+    @limits(calls=c.RATE, period=c.PERIOD)
     def check_flight(self, olc: str, dlc: str, dep_date: str, 
                      ret_date: str, adults: int, max_price: float, 
                      nonStop: bool=True, currency: str='PLN', 
@@ -89,4 +94,3 @@ class FlightSearch:
                   For further information, please visit: 
                   https://developers.amadeus.com/self-service/apis-docs/guides/developer-guides/common-errors/""")
             return None
-
