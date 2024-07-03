@@ -1,7 +1,6 @@
 import requests
 import constants as c
 import datetime as dt
-from ratelimit import limits, sleep_and_retry
 from flight_search import FlightSearch
 
 class FlightData:
@@ -41,8 +40,7 @@ class FlightData:
         Returns:
             dict: Information about cheapest flight
         """
-        @sleep_and_retry
-        @limits(calls=c.RATE, period=c.PERIOD)
+        
         def check_flight(date, duration):
             """Wrapped single operation of retrieving data from API, in order to
             impose limit on number of calls
@@ -64,11 +62,12 @@ class FlightData:
                                                 )
             return flight_data
         
-        data_about_cheapest_flight = {'price': float('inf'),
-                                      'departureDate': None, 
-                                      'departureCarrier': None,
-                                      'arrivalDate': None,
-                                      'arrivalCarrier': None}
+        lowest_price = float('inf')
+        data_about_cheapest_flight = {'price': 'N/A',
+                                      'departureDate': 'N/A', 
+                                      'departureCarrier': 'N/A',
+                                      'arrivalDate': 'N/A',
+                                      'arrivalCarrier': 'N/A'}
         # range is for number of dates limited by max_days (to not exceed iteration)
         for date in range(len(self.dates_span)-max_days):
             # checks all variations of visit duration specified by method arguments
@@ -79,7 +78,8 @@ class FlightData:
                 except (KeyError, TypeError, IndexError):
                     continue
                 else:
-                    if total_price < data_about_cheapest_flight['price']:
+                    if total_price < lowest_price:
+                        lowest_price = total_price
                         data_about_cheapest_flight['price'] = total_price
                         data_about_cheapest_flight['departureDate'] = flight_data['data'][0]['itineraries'][0]['segments'][0]['departure']['at'].split("T")[0]
                         dep_carrier_code = flight_data['data'][0]['itineraries'][0]['segments'][0]['carrierCode']
@@ -88,8 +88,5 @@ class FlightData:
                         arr_carrier_code = flight_data['data'][0]['itineraries'][1]['segments'][0]['carrierCode']
                         data_about_cheapest_flight['arrivalCarrier'] = flight_data['dictionaries']['carriers'][arr_carrier_code]
                 finally:
-                    print(f'{flight_data}\n\n\n')
                     del flight_data
-        print(data_about_cheapest_flight)
-f = FlightData(max_price=2000, destination_code='PAR')
-f.get_cheapest_flight()     
+        return data_about_cheapest_flight   
