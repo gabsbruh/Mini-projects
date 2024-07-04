@@ -1,12 +1,27 @@
 import requests
 import constants as c
+from collections import namedtuple
+from user import User
 
 class DataManager:
     """This class is responsible for talking to the Google Sheet."""
     def __init__(self):
         self._auth = c.AUTH_HEADER
         self._url = c.SHEETY_URL
+        self._users_url = c.USERS_SHEETY_URL
+        self._users = self._get_users_info()
         
+    def _get_users_info(self):
+        """Get data about users of application, consist of names and emails
+        """
+        users_data = requests.get(url=self._users_url, headers=self._auth)
+        users_data = users_data.json()
+        users_list = [User(name=user['whatIsYourFirstName?'],
+                           surname=user['whatIsYourLastName?'],
+                           email=user['whatIsYourEmail?'])
+                      for user in users_data['users']]
+        return users_list
+
     def get_data(self) -> dict:
         """Get data from sheet.
         
@@ -57,3 +72,7 @@ class DataManager:
             print(response.text)
         else:
             print('Filling sheet succeded.')
+
+    @property
+    def users(self):
+        return self._users
