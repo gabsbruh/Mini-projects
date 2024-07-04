@@ -3,6 +3,7 @@ import os
 # connect with spreadsheet
 AUTH_TOKEN = os.environ.get('SHEETY_BEARER_TOKEN')
 SHEETY_URL = os.environ.get('SHEETY_URL_2')
+USERS_SHEETY_URL = SHEETY_URL.replace('prices', 'users')
 AUTH_HEADER = {'Authorization': AUTH_TOKEN}
 
 # connect with amadeus api to search for flights
@@ -21,3 +22,7 @@ DEFAULT_ORIGIN_CODE = 'KRK'
 # API LIMITS
 PERIOD = 0.5 # time in seconds
 RATE = 1 # rate per period
+
+# my email
+MY_EMAIL = os.environ.get('MY_EMAIL')
+PASS = os.environ.get('EMAIL_SECRET')
