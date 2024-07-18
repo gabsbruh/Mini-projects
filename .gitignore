@@ -21,3 +21,6 @@ learn*
 
 # environmental variables
 .env
+
+# access token
+token.txt
