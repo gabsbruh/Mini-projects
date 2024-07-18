@@ -9,7 +9,6 @@ class SpotifyManager:
     """Correspond with Spotify API
     """
     def __init__(self):
-        pass        self.sp = spotipy.Spotify(
         self.sp = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
                 client_id=c.SPOTIFY_CLIENT_ID,
@@ -51,3 +50,8 @@ class SpotifyManager:
             raise Exception("Playlist was not created. See details in json response")
             print(new_playlist)
         
+    def add_tracks(self, tracks_uri: list):  
+        self.sp.user_playlist_add_tracks(user=self.user_id, 
+                                         playlist_id=self.playlist_id, 
+                                         tracks=tracks_uri, 
+                                         )
