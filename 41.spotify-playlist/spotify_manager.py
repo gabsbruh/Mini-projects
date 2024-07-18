@@ -33,3 +33,21 @@ class SpotifyManager:
         else:
             return uri
     
+    def create_playlist(self, date, is_public=False):
+        year, month, day = date.split("-")
+        chic_date = f"{day}.{month}.{year}"
+        playlist_name = f"{chic_date} Billboard Hot 100™"
+        description = f"Auto-generated playlist containing all blockbusters from the Billboard chart dated {chic_date}"
+        new_playlist = self.sp.user_playlist_create(user=self.user_id,
+                                     name=playlist_name,
+                                     public=is_public,
+                                     description=description
+                                     )
+        # get playlist id to instance variable
+        try:
+            self.playlist_id = new_playlist["id"]
+            self.playlist_url = new_playlist["external_urls"]["spotify"]
+        except IndexError:
+            raise Exception("Playlist was not created. See details in json response")
+            print(new_playlist)
+        
