@@ -14,15 +14,12 @@ class BillboardScrap:
         else:
             return response.text
     
-    def scrap_web(self):
+    def scrap_billboard_website(self):
         soup = BeautifulSoup(self.html_content, 'html.parser')
         titles = soup.select("li ul li h3")
-        authors = soup.select("li ul li span")
+        authors = soup.select("span[class^='c-label a-no-trucate']")
             
         songs_authors = [] # tuples containing song name and its author
         for title, author in zip(titles, authors):
             songs_authors.append((title.getText().strip(), author.getText().strip()))
-        print(songs_authors)
-
-b = BillboardScrap("1958-08-04")
-b.scrap_web()
+        return songs_authors
