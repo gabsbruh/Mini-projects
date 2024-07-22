@@ -9,4 +9,3 @@ class HeaderSwitch:
         random_keys = random.sample(list(self.orginal_header.keys()), no_random_variables)
         new_header = {key: self.orginal_header[key] for key in random_keys}
         return new_header
-            
