@@ -29,7 +29,7 @@ class InternetSpeed:
         self.upload = float(outcome[1].text)
     
     def report(self):
-        flag=  True
+        flag = True
         print("*** INTERNET SPEED REPORT ***")
         print(f"\nYour download speed is {self.download} Mbps.")
         if self.is_downloading_good():
@@ -37,7 +37,7 @@ class InternetSpeed:
         else:
             print("DOWNLOAD DOESN'T MEET THE REQUIREMENTS!")
             flag = False
-        print(f"\nYour upload speed is {self.download} Mbps.")
+        print(f"\nYour upload speed is {self.upload} Mbps.")
         if self.is_downloading_good():
             print("\tIt meets the requirements :)")
         else:
@@ -56,7 +56,3 @@ class InternetSpeed:
             return False
         else:
             return True
-
-iss = InternetSpeed()
-iss.measure_speed()
-iss.report()
