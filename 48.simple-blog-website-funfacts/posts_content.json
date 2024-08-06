@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "title": "The Eiffel Tower Grows in Summer",
+        "subtitle": "Thermal Expansion at Its Best",
+        "body": "Did you know that the Eiffel Tower can grow taller during the summer? Due to thermal expansion, the iron structure can expand by up to 6 inches (15 cm) when the temperature rises. The heat causes the metal to expand, making the iconic Parisian landmark slightly taller during the warmer months."
+    },
+    {
+        "id": 2,
+        "title": "Bananas Are Berries, But Strawberries Aren't",
+        "subtitle": "The Surprising Truth About Fruit Classifications",
+        "body": "In botanical terms, bananas qualify as berries, while strawberries do not. A berry is a fleshy fruit produced from a single ovary with seeds embedded in the flesh. Bananas meet this criterion, whereas strawberries are aggregate fruits, formed from multiple ovaries of a single flower."
+    },
+    {
+        "id": 3,
+        "title": "Honey Never Spoils",
+        "subtitle": "The Ancient Sweet Treat That Lasts Forever",
+        "body": "Honey is known for its remarkable ability to never spoil. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible. This longevity is due to honey's low moisture content and acidic pH, which create an inhospitable environment for bacteria and microorganisms."
+    },
+    {
+        "id": 4,
+        "title": "Octopuses Have Three Hearts",
+        "subtitle": "The Multi-Hearted Marvels of the Deep",
+        "body": "Octopuses are fascinating creatures with three hearts. Two hearts pump blood to the gills, while the third heart pumps it to the rest of the body. Interestingly, the central heart stops beating when the octopus swims, which is why these creatures prefer crawling to conserve energy."
+    },
+    {
+        "id": 5,
+        "title": "The Great Wall of China Isn't Visible from Space",
+        "subtitle": "Debunking a Common Myth",
+        "body": "Contrary to popular belief, the Great Wall of China is not visible from space with the naked eye. While it's an impressive structure, it is relatively narrow and made from materials that blend into the natural landscape. Astronauts confirm that it is difficult to see without aid, debunking the long-held myth."
+    },
+    {
+        "id": 6,
+        "title": "Koalas Have Fingerprints Similar to Humans",
+        "subtitle": "Marsupials with Unique Identification Marks",
+        "body": "Koalas possess fingerprints that are almost indistinguishable from human fingerprints, even under a microscope. This similarity is so striking that koala prints have occasionally confused crime scene investigations. These unique prints help koalas grip tree branches as they climb."
+    },
+    {
+        "id": 7,
+        "title": "A Day on Venus is Longer Than a Year",
+        "subtitle": "The Peculiar Rotation of Earth's Sister Planet",
+        "body": "Venus has an incredibly slow rotation on its axis, taking about 243 Earth days to complete one rotation. Surprisingly, it orbits the Sun faster than it rotates, taking about 225 Earth days to complete one orbit. Therefore, a day on Venus is longer than a year on Venus."
+    },
+    {
+        "id": 8,
+        "title": "There Are More Stars in the Universe Than Grains of Sand on Earth",
+        "subtitle": "The Mind-Boggling Vastness of the Cosmos",
+        "body": "Astronomers estimate that there are about 100 billion galaxies in the observable universe, each containing hundreds of billions of stars. This staggering number far exceeds the total number of grains of sand on all the beaches and deserts of Earth, highlighting the unimaginable scale of the cosmos."
+    },
+    {
+        "id": 9,
+        "title": "Sloths Only Poop Once a Week",
+        "subtitle": "The Slow Life of Nature's Laziest Mammal",
+        "body": "Sloths are known for their slow and lethargic lifestyle, and this extends to their digestive habits. These tree-dwelling mammals only defecate about once a week, climbing down from the trees to do so. This risky behavior exposes them to predators, making it a significant event in their otherwise slow-paced lives."
+    },
+    {
+        "id": 10,
+        "title": "The Shortest War in History Lasted 38 Minutes",
+        "subtitle": "The Brief Conflict Between Britain and Zanzibar",
+        "body": "The Anglo-Zanzibar War, fought on August 27, 1896, is considered the shortest war in history. The conflict between the British Empire and the Sultanate of Zanzibar lasted only 38 minutes before the Sultan's forces surrendered. This brief war was triggered by a succession dispute following the death of the pro-British Sultan."
+    }
+]
