@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime
-from flask import Flask, render_template
+from notification_manager import NotificationManager
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -31,9 +32,19 @@ def home():
 def about():
     return render_template("about.html")
 
-@app.route('/contact')
+@app.route('/contact', methods=["GET", "POST"])
 def contact():
-    return render_template("contact.html")
+    if request.method == "POST":
+        data = {
+            "name": request.form["name"],
+            "email": request.form["email"],
+            "phone": request.form["phone"],
+            "message": request.form["message"]
+        }
+        nm = NotificationManager(data, "gabsdidit@icloud.com")
+        nm.send_email()
+        return render_template("contact.html", is_sent=True)
+    return render_template("contact.html", is_sent=False)
 
 @app.route('/post/<int:post_id>')
 def post(post_id: int):
