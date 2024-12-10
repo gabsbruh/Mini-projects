@@ -24,3 +24,6 @@ learn*
 
 # access token
 token.txt
+
+# DS Store
+.DS_Store
