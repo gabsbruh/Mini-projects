@@ -40,7 +40,7 @@ class GetProperties:
         
         # find number of pages
         time.sleep(1)
-        page_amount = self.driver.find_element(By.XPATH, value="/html/body/main/div/div/div/article/section/div[3]/nav/ul/li[7]/a/span")
+        page_amount = self.driver.find_element(By.XPATH, value="/html/body/main/div/div/div/article/section/div[3]/nav/ul/li[last()]/a/span")
         page_amount = int(page_amount.text)
         page_range = range(1, page_amount+1)
         
